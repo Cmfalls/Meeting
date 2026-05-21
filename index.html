@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -33,7 +33,7 @@
     img, video { max-width: 100%; display: block; }
     h1, h2, h3 { font-weight: 800; }
 
-    /* â”€â”€ Top stripe â”€â”€ */
+    /* -- Top stripe -- */
     .topline {
       height: 5px;
       display: grid;
@@ -43,7 +43,7 @@
     .topline span:nth-child(2) { background: #f8fbff; }
     .topline span:nth-child(3) { background: var(--blue); }
 
-    /* â”€â”€ Header â”€â”€ */
+    /* -- Header -- */
     header {
       position: sticky;
       top: 0;
@@ -83,11 +83,11 @@
     }
     .navlinks a:hover { color: var(--text); background: rgba(255,255,255,.07); }
 
-    /* â”€â”€ Layout â”€â”€ */
+    /* -- Layout -- */
     main { overflow: hidden; }
     .wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
 
-    /* â”€â”€ Hero â”€â”€ */
+    /* -- Hero -- */
     .hero { padding: 72px 0 68px; }
     .hero-grid {
       display: grid;
@@ -185,7 +185,7 @@
     }
     .stat span { color: var(--muted); font-size: 13px; line-height: 1.4; }
 
-    /* â”€â”€ Sections â”€â”€ */
+    /* -- Sections -- */
     section { padding: 64px 0; border-top: 1px solid var(--line); }
 
     .section-head {
@@ -211,7 +211,7 @@
     }
     .section-head p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.6; }
 
-    /* â”€â”€ Grid â”€â”€ */
+    /* -- Grid -- */
     .grid {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
@@ -220,7 +220,7 @@
     .grid-5 { grid-template-columns: repeat(5, 1fr); }
     .grid-5 .tile { grid-column: span 1; }
 
-    /* â”€â”€ Tiles â”€â”€ */
+    /* -- Tiles -- */
     .tile {
       grid-column: span 4;
       border: 1px solid var(--line);
@@ -278,7 +278,7 @@
 
     .tile-foot { padding: 0 16px 16px; }
 
-    /* â”€â”€ Carousel slide grid previews â”€â”€ */
+    /* -- Carousel slide grid previews -- */
     .slide-grid {
       display: grid;
       gap: 2px;
@@ -320,7 +320,7 @@
       color: rgba(255,255,255,.65);
     }
 
-    /* â”€â”€ Carousel cover cell â”€â”€ */
+    /* -- Carousel cover cell -- */
     .cover-cell {
       position: relative;
       width: 100%;
@@ -384,7 +384,7 @@
       margin-left: 3px;
     }
 
-    /* â”€â”€ View carousel button â”€â”€ */
+    /* -- View carousel button -- */
     .view-btn {
       display: flex;
       align-items: center;
@@ -404,7 +404,7 @@
     .view-btn:hover { background: rgba(255,255,255,.11); border-color: rgba(255,255,255,.4); }
     .view-btn svg { flex-shrink: 0; opacity: .7; }
 
-    /* â”€â”€ Reel play overlay â”€â”€ */
+    /* -- Reel play overlay -- */
     .play-overlay {
       position: absolute;
       inset: 0;
@@ -433,18 +433,20 @@
     .play-overlay:hover .play-circle { transform: scale(1.1); background: rgba(0,0,0,.55); }
     .play-circle svg { width: 22px; height: 22px; margin-left: 4px; }
 
-    /* â”€â”€ USO feature â”€â”€ */
+    /* -- USO feature -- */
     .uso-feature {
       display: grid;
-      grid-template-columns: minmax(320px, .95fr) minmax(0, 1.85fr);
+      grid-template-columns: minmax(340px, .82fr) minmax(0, 1.6fr);
       gap: 0;
       align-items: stretch;
       border: 1px solid var(--line);
+      background: rgba(11,24,42,.78);
       overflow: hidden;
     }
     .uso-visual {
       overflow: hidden;
       min-height: 320px;
+      padding: 28px;
       background:
         linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
         #07111f;
@@ -452,18 +454,21 @@
       place-items: center;
     }
     .uso-visual img {
-      width: 100%;
-      height: 100%;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 520px;
       object-fit: contain;
       object-position: center;
       display: block;
+      box-shadow: 0 22px 58px rgba(0,0,0,.32);
     }
     .link-panel {
       background:
-        linear-gradient(160deg, rgba(36,90,165,.16), rgba(255,255,255,.04)),
-        rgba(12,26,44,.86);
+        linear-gradient(160deg, rgba(255,255,255,.08), rgba(36,90,165,.12)),
+        #12253d;
       border-left: 1px solid var(--line);
-      padding: 36px 40px;
+      padding: 44px 46px;
       display: flex;
       flex-direction: column;
       gap: 14px;
@@ -472,10 +477,10 @@
     .lockup-card {
       width: fit-content;
       max-width: 100%;
-      background: rgba(255,255,255,.92);
+      background: #f4f1e9;
       border: 1px solid rgba(255,255,255,.72);
-      padding: 18px 22px;
-      margin-bottom: 8px;
+      padding: 24px 34px;
+      margin-bottom: 10px;
       box-shadow: 0 18px 45px rgba(0,0,0,.18);
     }
     .lockup-card img {
@@ -514,20 +519,29 @@
       display: grid;
       grid-template-rows: auto 1fr;
       min-height: 100%;
+      overflow: hidden;
     }
     .packaging-card .tile-media {
       border-bottom: 1px solid var(--line);
       min-height: 360px;
-    }
-    .packaging-card .tile-media img {
-      object-fit: contain;
-      padding: 24px;
+      padding: 28px;
+      display: grid;
+      place-items: center;
       background:
-        linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.015)),
+        linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.018)),
         #07111f;
     }
+    .packaging-card .tile-media img {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 380px;
+      object-fit: contain;
+      background: #fff;
+      box-shadow: 0 18px 52px rgba(0,0,0,.28);
+    }
 
-    /* â”€â”€ America 250 feature â”€â”€ */
+    /* -- America 250 feature -- */
     .a250-feature {
       display: grid;
       grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
@@ -564,7 +578,7 @@
     .a250-spec b { display: block; font-size: 12px; color: var(--gold); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 4px; }
     .a250-spec span { font-size: 13px; color: var(--muted); }
 
-    /* â”€â”€ Meeting steps â”€â”€ */
+    /* -- Meeting steps -- */
     .steps {
       list-style: none;
       margin: 0;
@@ -607,7 +621,7 @@
       font-size: 13px;
     }
 
-    /* â”€â”€ Lightbox â”€â”€ */
+    /* -- Lightbox -- */
     .lb {
       position: fixed;
       inset: 0;
@@ -690,7 +704,7 @@
     .lb-dot.active { background: #fff; transform: scale(1.25); }
     .lb-dot:hover:not(.active) { background: rgba(255,255,255,.5); }
 
-    /* â”€â”€ Responsive â”€â”€ */
+    /* -- Responsive -- */
     @media (max-width: 920px) {
       nav { height: auto; padding: 14px 24px; flex-direction: column; align-items: flex-start; gap: 10px; }
       .hero-grid, .section-head, .uso-feature, .a250-feature, .packaging-grid { grid-template-columns: 1fr; }
@@ -731,14 +745,14 @@
 
   <main>
 
-    <!-- â”€â”€ Hero â”€â”€ -->
+    <!-- -- Hero -- -->
     <div class="wrap hero">
       <div class="hero-grid">
         <div>
           <div class="kicker">Marketing Department Recap</div>
           <h1>What we've been building.</h1>
           <p class="hero-copy">
-            A meeting walkthrough of recent campaign work â€” carousels, reels, the USO launch, and America 250 creative â€” all in one place.
+            A meeting walkthrough of recent campaign work &mdash; carousels, reels, the USO launch, and America 250 creative &mdash; all in one place.
           </p>
           <div class="hero-btns">
             <a class="btn primary" href="#social">Start walkthrough</a>
@@ -757,7 +771,7 @@
       </div>
     </div>
 
-    <!-- â”€â”€ Social â”€â”€ -->
+    <!-- -- Social -- -->
     <section id="social">
       <div class="wrap">
         <div class="section-head">
@@ -805,7 +819,7 @@
             </div>
             <div class="tile-body">
               <h3>Betsy Ross / America 250 Carousel</h3>
-              <p>Historically grounded America 250 post built around the 13-star flag â€” visual hook, historical context, product moment, and CTA.</p>
+              <p>Historically grounded America 250 post built around the 13-star flag &mdash; visual hook, historical context, product moment, and CTA.</p>
               <div class="tags"><span class="tag">America 250</span><span class="tag">Carousel</span><span class="tag">4 Slides</span></div>
             </div>
             <div class="tile-foot">
@@ -828,7 +842,7 @@
             </div>
             <div class="tile-body">
               <h3>USO Announcement Carousel</h3>
-              <p>Correct launch carousel introducing the Flags USA Ã— USO partnership with the partner message and checkout give-back CTA.</p>
+              <p>Correct launch carousel introducing the Flags USA &times; USO partnership with the partner message and checkout give-back CTA.</p>
               <div class="tags"><span class="tag">USO</span><span class="tag">Carousel</span><span class="tag">2 Slides</span></div>
             </div>
             <div class="tile-foot">
@@ -851,7 +865,7 @@
             </div>
             <div class="tile-body">
               <h3>Residential Flagpole Guide</h3>
-              <p>Educational carousel walking customers through how to choose and install a residential flagpole â€” doubles as an evergreen social asset.</p>
+              <p>Educational carousel walking customers through how to choose and install a residential flagpole &mdash; doubles as an evergreen social asset.</p>
               <div class="tags"><span class="tag">Instagram</span><span class="tag">Carousel</span><span class="tag">5 Slides</span><span class="tag">Evergreen</span></div>
             </div>
             <div class="tile-foot">
@@ -874,7 +888,7 @@
             </div>
             <div class="tile-body">
               <h3>What Our Customers Are Saying</h3>
-              <p>Social proof carousel â€” five real customer reviews turned into on-brand slide content, ready to post as an organic trust-builder.</p>
+              <p>Social proof carousel &mdash; five real customer reviews turned into on-brand slide content, ready to post as an organic trust-builder.</p>
               <div class="tags"><span class="tag">Instagram</span><span class="tag">Carousel</span><span class="tag">5 Slides</span><span class="tag">Reviews</span></div>
             </div>
             <div class="tile-foot">
@@ -889,7 +903,7 @@
       </div>
     </section>
 
-    <!-- â”€â”€ Reels â”€â”€ -->
+    <!-- -- Reels -- -->
     <section id="reels">
       <div class="wrap">
         <div class="section-head">
@@ -925,7 +939,7 @@
             </div>
             <div class="tile-body">
               <h3>U.S. Flag Through the Years</h3>
-              <p>Historical evolution reel â€” flag changes as a fast visual timeline of American growth.</p>
+              <p>Historical evolution reel &mdash; flag changes as a fast visual timeline of American growth.</p>
               <div class="tags"><span class="tag">Reel</span><span class="tag">History</span></div>
             </div>
           </article>
@@ -939,7 +953,7 @@
             </div>
             <div class="tile-body">
               <h3>USO Launch Reel</h3>
-              <p>Military footage, message card, and all-white logo outro for the Flags USA Ã— USO launch.</p>
+              <p>Military footage, message card, and all-white logo outro for the Flags USA &times; USO launch.</p>
               <div class="tags"><span class="tag">Reel</span><span class="tag">USO</span><span class="tag">Launch</span></div>
             </div>
           </article>
@@ -953,7 +967,7 @@
             </div>
             <div class="tile-body">
               <h3>Residential Flagpole Guide</h3>
-              <p>Step-by-step flagpole selection and installation walkthrough â€” narrated with audio.</p>
+              <p>Step-by-step flagpole selection and installation walkthrough &mdash; narrated with audio.</p>
               <div class="tags"><span class="tag">Reel</span><span class="tag">Flagpole</span><span class="tag">Audio</span></div>
             </div>
           </article>
@@ -962,7 +976,7 @@
       </div>
     </section>
 
-    <!-- â”€â”€ USO â”€â”€ -->
+    <!-- -- USO -- -->
     <section id="uso">
       <div class="wrap">
         <div class="section-head">
@@ -970,7 +984,7 @@
             <div class="section-kicker">USO Launch</div>
             <h2>A complete launch package.</h2>
           </div>
-          <p>Social, landing page, email, and reel â€” all from one message: every order is a chance to give back.</p>
+          <p>Social, landing page, email, and reel &mdash; all from one message: every order is a chance to give back.</p>
         </div>
 
         <div class="uso-feature">
@@ -981,11 +995,11 @@
             <div class="lockup-card">
               <img src="assets/images/uso-lockup.png" alt="Flags USA x USO">
             </div>
-            <h3>Flags USA Ã— USO</h3>
+            <h3>Flags USA &times; USO</h3>
             <p>Every order can become an opportunity to support service members and military families. The message is simple; the execution spans every surface.</p>
-            <a href="https://flagsusa.com/pages/uso" target="_blank" rel="noreferrer">Live landing page <span>flagsusa.com/pages/uso â†’</span></a>
-            <a href="assets/linked/uso-flagsusa-newsletter.html" target="_blank" rel="noreferrer">Newsletter HTML <span>open email creative â†’</span></a>
-            <a href="assets/linked/shopify-uso-page.html" target="_blank" rel="noreferrer">Landing page source <span>local HTML â†’</span></a>
+            <a href="https://flagsusa.com/pages/uso" target="_blank" rel="noreferrer">Live landing page <span>flagsusa.com/pages/uso &rarr;</span></a>
+            <a href="assets/linked/uso-flagsusa-newsletter.html" target="_blank" rel="noreferrer">Newsletter HTML <span>open email creative &rarr;</span></a>
+            <a href="assets/linked/shopify-uso-page.html" target="_blank" rel="noreferrer">Landing page source <span>local HTML &rarr;</span></a>
           </div>
         </div>
       </div>
@@ -1035,7 +1049,7 @@
             <div class="section-kicker">Meeting Agenda</div>
             <h2>Run of show.</h2>
           </div>
-          <p>Suggested talk track â€” five beats, about 15 minutes total.</p>
+          <p>Suggested talk track &mdash; five beats, about 15 minutes total.</p>
         </div>
         <ol class="steps">
           <li class="step">
@@ -1056,7 +1070,7 @@
           <li class="step">
             <span class="step-num">04</span>
             <b>USO Launch</b>
-            <span>Walk through the ecosystem â€” page, email, social, and reel. Biggest story of the quarter.</span>
+            <span>Walk through the ecosystem &mdash; page, email, social, and reel. Biggest story of the quarter.</span>
           </li>
           <li class="step">
             <span class="step-num">05</span>
@@ -1076,7 +1090,7 @@
     </div>
   </footer>
 
-  <!-- â”€â”€ Lightbox â”€â”€ -->
+  <!-- -- Lightbox -- -->
   <div id="lb" class="lb" role="dialog" aria-modal="true">
     <button id="lbClose" class="lb-close">&#x2715;</button>
     <div id="lbRow" class="lb-row">
