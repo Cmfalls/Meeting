@@ -1,0 +1,649 @@
+<!--
+  FLAGSUSA x USO — Shopify Custom Page
+  =====================================
+  Paste entire file contents into the Shopify page HTML editor (<> button).
+  Keep page visibility: Hidden until ready to publish.
+
+  IMAGES — Upload these files to Shopify Admin > Content > Files,
+  then replace each src="UPLOAD:filename" placeholder with the CDN URL.
+
+  Files to upload:
+    1. untitled design (3).png     → hero background
+    2. united_service_organizations_logo.svg.png → USO logo (used 3×)
+    3. flagsusa-logo.svg           → Flags USA logo (used 2×)
+    4. pexels-george-pak-7983750.jpg          → Soldier reuniting with family
+    5. 2ecb9e9b-2c01-48d8-8b15-bd2f58bd0c34.jpg → Three generations Flags USA family
+    6. cristina-glebova-fyqqbr0ezka-unsplash.jpg → American flag background (section bg)
+    7. pexels-christina-petsos-200616875-11874072.jpg → Soldier saluting flag
+    8. 3638e964-35da-4c59-8951-7c4be3a5332d.jpg     → $50K section background
+    9. istrfry-marcus-t41c_r3cvos-unsplash.jpg       → American flag at sunrise
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ── Shopify page title / wrapper cleanup ─────────────────── */
+.main-page-title,
+.page-title,
+.template-page .main-page-title,
+.template-page .page-title,
+.template-page h1.title,
+.shopify-section h1.main-page-title,
+.page-width > h1:first-child,
+.page-width .main-page-title,
+.page-width--narrow > h1:first-child,
+.shopify-section .page-width > h1:first-child,
+.template-page main .page-width > h1:first-child,
+.template-page main .page-width .title:first-child,
+.title-wrapper-with-link,
+.title-wrapper,
+.page-header,
+.page-title-wrapper,
+.main-page-title-wrapper,
+#MainContent h1,
+main h1 {
+  display: none !important;
+}
+
+#MainContent .uso-page h1,
+main .uso-page h1,
+.uso-page h1 {
+  display: block !important;
+}
+
+#MainContent .rte .uso-page,
+main .rte .uso-page,
+#MainContent .page-width .uso-page,
+main .page-width .uso-page,
+#MainContent .page-width--narrow .uso-page,
+main .page-width--narrow .uso-page {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  margin-left: calc(50% - 50vw) !important;
+  margin-right: calc(50% - 50vw) !important;
+}
+
+/* ── Reset / Base ─────────────────────────────────────────── */
+.uso-page *,
+.uso-page *::before,
+.uso-page *::after {
+  box-sizing: border-box;
+}
+
+.uso-page {
+  --ink:      #1e343d;
+  --red:      #a62b25;
+  --red-dark: #7f1f1a;
+  --paper:    #f8f5ef;
+  --panel:    #ffffff;
+  --soft:     #edf1f1;
+  --muted:    #4f5c61;
+  --line:     #d5dadd;
+  --uso-navy: #002147;
+  --uso-red:  #bb133e;
+  --radius:   10px;
+  --shadow:   0 14px 36px rgba(30,52,61,0.12);
+  font-family: 'Jost', system-ui, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  margin-top: -120px !important;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-bottom: -80px !important;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+.uso-page img { display: block; max-width: 100%; }
+.uso-page a { color: var(--red); text-decoration: none; }
+.uso-page a:hover { text-decoration: underline; }
+
+/* ── Layout ───────────────────────────────────────────────── */
+.uso-container {
+  max-width: 1160px;
+  width: calc(100% - 48px);
+  margin: 0 auto;
+}
+.uso-section { padding: 72px 0; }
+.uso-section + .uso-section { border-top: 1px solid var(--line); }
+
+.uso-page .eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--red);
+  margin-bottom: 14px;
+  margin-top: 0;
+}
+
+.uso-page h1,
+.uso-page h2,
+.uso-page h3 {
+  font-family: 'Futura Bold', sans-serif;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-top: 0;
+}
+.uso-page h1 { font-size: clamp(36px, 5vw, 60px); font-weight: 700; letter-spacing: -0.03em; }
+.uso-page h2 { font-size: clamp(26px, 3.5vw, 40px); font-weight: 600; letter-spacing: -0.02em; }
+.uso-page h3 { font-size: 20px; font-weight: 600; }
+.uso-page p  { font-size: 16px; color: var(--muted); line-height: 1.7; margin-top: 0; }
+
+.uso-btn {
+  display: inline-block;
+  padding: 14px 32px;
+  border-radius: 6px;
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  border: none;
+  text-decoration: none !important;
+  transition: background 0.15s, transform 0.1s;
+  background: var(--red);
+  color: #fff !important;
+}
+.uso-btn:hover { background: var(--red-dark); transform: translateY(-1px); }
+
+/* ── Hero ─────────────────────────────────────────────────── */
+.uso-hero {
+  position: relative;
+  min-height: 800px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+.uso-hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+}
+.uso-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,33,71,0.92) 0%, rgba(0,33,71,0.5) 50%, rgba(0,33,71,0.08) 100%);
+}
+.uso-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 68px 56px;
+  max-width: 740px;
+}
+.uso-hero-content .eyebrow { color: rgba(255,255,255,0.8); letter-spacing: 0.12em; }
+.uso-hero-content h1 { color: #fff; margin-bottom: 20px; }
+.uso-hero-content p  { color: rgba(255,255,255,0.85); font-size: 17px; max-width: 500px; margin-bottom: 36px; line-height: 1.65; }
+
+/* ── Logos Row ────────────────────────────────────────────── */
+.uso-logos-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  padding: 28px 0;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+}
+.uso-logos-row .brand-uso  img { height: 80px; width: auto; }
+.uso-logos-row .brand-flags img { height: 44px; width: auto; }
+.uso-logos-row .divider { width: 1px; height: 40px; background: var(--line); flex-shrink: 0; }
+
+/* ── Media + Text ─────────────────────────────────────────── */
+.uso-media-text {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 52px;
+  align-items: start;
+}
+.uso-media-text.reverse { direction: rtl; }
+.uso-media-text.reverse > * { direction: ltr; }
+.uso-media-img { border-radius: var(--radius); overflow: hidden; box-shadow: 0 24px 60px rgba(30,52,61,0.22), 0 4px 14px rgba(30,52,61,0.1); position: relative; height: 480px; }
+.uso-media-img img { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; object-fit: cover; display: block; margin: 0 !important; padding: 0 !important; }
+.uso-media-copy { display: flex; flex-direction: column; gap: 14px; max-width: 520px; }
+.uso-media-copy .eyebrow { margin-bottom: 2px; }
+.uso-media-copy h2 { margin-top: 0; font-size: clamp(30px, 3.2vw, 44px); }
+.uso-media-copy p  { font-size: 16px; line-height: 1.82; color: #3d4e55; }
+
+/* ── Partner Cards ────────────────────────────────────────── */
+.uso-partner-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: stretch; }
+.uso-partner-card {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 18px 42px rgba(0,20,50,0.28);
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  gap: 0;
+}
+
+.uso-card-img {
+  width: 100%;
+  height: 260px;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: block;
+  line-height: 0;
+  font-size: 0;
+  position: relative;
+}
+.uso-card-img img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.uso-card-img::after {
+  display: none;
+}
+
+.uso-card-body {
+  padding: 18px 44px 40px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Logo — fixed-height slot so both cards stay visually even */
+.uso-card-logo {
+  display: block;
+  align-self: center;
+  height: 80px;
+  width: auto;
+  max-width: 280px;
+  object-fit: contain;
+  object-position: center center;
+  margin: 0 auto 12px;
+}
+.uso-partner-card h3 {
+  line-height: 1.18;
+  margin: 0 auto 18px;
+  font-size: clamp(21px, 1.8vw, 24px);
+  max-width: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* USO card */
+.uso-card--uso { background: #002147; }
+.uso-card--uso .uso-card-img { background: #002147; }
+.uso-card--uso .uso-card-img img { object-position: center center; transform: none; }
+.uso-card--uso .uso-card-body { background: #002147; }
+.uso-card--uso .uso-card-logo { max-width: 220px; }
+.uso-card--uso h3 { color: #fff; }
+
+/* Flags card */
+.uso-card--flags { background: #f8f5ef; }
+.uso-card--flags .uso-card-img { background: #f8f5ef; }
+.uso-card--flags .uso-card-img img { object-position: center center; transform: none; }
+.uso-card--flags .uso-card-body { background: #f8f5ef; }
+.uso-card--flags .uso-card-logo {
+  max-width: 260px;
+}
+.uso-card--flags h3 { color: var(--ink); }
+
+/* Trait list */
+.uso-traits { list-style: none; display: flex; flex-direction: column; margin: 0 auto; padding: 0; width: 100%; max-width: 470px; }
+.uso-traits li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.86);
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: left;
+}
+.uso-traits li:first-child { padding-top: 11px; }
+.uso-traits li:last-child { border-bottom: none; padding-bottom: 0; }
+
+.uso-traits li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  margin-top: 0.45em;
+  border-radius: 999px;
+}
+.uso-card--uso   .uso-traits li::before { background: var(--uso-red); }
+.uso-card--flags .uso-traits li::before { background: #a62b25; }
+
+.uso-card--flags .uso-traits li {
+  border-bottom-color: rgba(30,52,61,0.16);
+  color: rgba(30,52,61,0.82);
+}
+
+/* First bullet — hero stat emphasis */
+.uso-traits li.uso-stat-hero {
+  color: rgba(255,255,255,0.86);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.uso-card--flags .uso-traits li.uso-stat-hero { color: rgba(30,52,61,0.82); }
+
+.uso-partnership-bg {
+  background: url('https://cdn.shopify.com/s/files/1/0888/9240/8090/files/cristina-glebova-fyqqbr0ezka-unsplash.jpg?v=1777906927') center 40% / cover no-repeat;
+}
+.uso-partnership-section {
+  background: linear-gradient(rgba(237,241,241,0.94), rgba(237,241,241,0.94));
+  border-bottom: none;
+  backdrop-filter: blur(3px);
+}
+
+/* ── Impact Stats ─────────────────────────────────────────── */
+.uso-impact-section {
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 96px 0 116px;
+  border-top: 0 !important;
+  border-bottom: 0;
+}
+.uso-impact-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(248,245,239,0.16) 0%, rgba(248,245,239,0.82) 48%, rgba(248,245,239,0.95) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+.uso-impact-section .uso-container { position: relative; z-index: 1; }
+.uso-impact-intro { max-width: 620px; margin: 0 auto 56px; }
+.uso-impact-intro h2 { margin-top: 8px; }
+.uso-impact-intro p  { color: #415158; font-size: 18px; }
+.uso-impact-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+.uso-impact-tile {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafb 100%);
+  border: 1px solid #d7dee4;
+  border-radius: 14px;
+  padding: 36px 24px 32px;
+  box-shadow: 0 14px 36px rgba(0,25,56,0.14);
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+.uso-impact-tile:hover { transform: translateY(-6px); border-color: #c5d0da; box-shadow: 0 18px 42px rgba(0,25,56,0.2); }
+.uso-tile-icon {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(187,19,62,0.08);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 4px;
+}
+.uso-tile-icon svg { width: 22px; height: 22px; stroke: var(--uso-red); fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+.uso-impact-num {
+  font-family: 'Futura Bold', sans-serif;
+  font-size: clamp(38px, 4.5vw, 56px);
+  font-weight: 700;
+  color: var(--uso-navy);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.uso-impact-label { font-size: 13px; color: #44535a; line-height: 1.45; max-width: 170px; text-align: center; }
+
+/* ── $50K Match Callout ───────────────────────────────────── */
+.uso-match-band {
+  position: relative;
+  padding: 128px 0 112px;
+  margin-top: -48px;
+  border-top: 0 !important;
+  overflow: hidden;
+}
+.uso-match-band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(248,245,239,0.12) 0%, rgba(248,245,239,0.7) 42%, rgba(248,245,239,0.9) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+.uso-match-band .uso-container { position: relative; z-index: 1; }
+.uso-donation-callout {
+  background: linear-gradient(145deg, #012655 0%, #002147 62%, #001a39 100%);
+  color: #fff;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 52px 56px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 34px;
+  align-items: stretch;
+  box-shadow: 0 28px 70px rgba(0,20,46,0.44);
+  max-width: 880px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+.uso-donation-callout::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 85% 22%, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0) 48%);
+  pointer-events: none;
+}
+.uso-callout-copy { max-width: 620px; }
+.uso-donation-callout h2 { color: #fff; font-size: clamp(30px, 3.3vw, 44px); margin-bottom: 12px; }
+.uso-donation-callout p  { color: rgba(255,255,255,0.82); font-size: 17px; line-height: 1.65; }
+.uso-donation-callout .uso-btn {
+  background: #fff;
+  color: var(--uso-navy) !important;
+  font-weight: 700;
+  padding: 13px 26px;
+  border-radius: 7px;
+  border: 1px solid rgba(255,255,255,0.45);
+  box-shadow: 0 5px 14px rgba(0,0,0,0.2);
+}
+.uso-donation-callout .uso-btn:hover { background: #f1f5fa; transform: translateY(-1px); }
+.uso-callout-stat {
+  text-align: center;
+  min-width: 220px;
+  padding: 24px 18px;
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(2px);
+}
+.uso-big-num   { font-family: 'Futura Bold', sans-serif; font-size: clamp(66px, 7vw, 86px); font-weight: 700; color: #fff; line-height: 0.95; }
+.uso-big-label { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.62); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 10px; }
+
+/* ── Page Footer ──────────────────────────────────────────── */
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .uso-media-text { grid-template-columns: 1fr; gap: 36px; }
+  .uso-media-text.reverse { direction: ltr; }
+  .uso-donation-callout { grid-template-columns: 1fr; text-align: center; }
+  .uso-impact-section { padding: 76px 0 92px; }
+  .uso-match-band { margin-top: -28px; padding: 94px 0 86px; }
+  .uso-hero-content { padding: 40px 24px; }
+  .uso-partner-cards { grid-template-columns: 1fr; }
+  .uso-card-img { height: 220px; }
+  .uso-impact-grid { grid-template-columns: repeat(2, 1fr); }
+  .uso-logos-row { gap: 24px; }
+}
+@media (max-width: 640px) {
+  .uso-impact-grid { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; }
+  .uso-hero { min-height: 600px; }
+  .uso-page { margin-top: -80px !important; }
+}
+</style>
+
+<div class="uso-page">
+
+  <!-- Hero -->
+  <section class="uso-hero">
+    <img src="https://cdn.shopify.com/s/files/1/0888/9240/8090/files/untitled_design_3.png?v=1777906927" alt="Veteran honor guard carrying the American flag" class="uso-hero-img">
+    <div class="uso-hero-overlay"></div>
+    <div class="uso-hero-content">
+      <p class="eyebrow">An Announcement from Flags USA</p>
+      <h1>We're a Proud Partner of the USO.</h1>
+      <p>This April, every flag purchase at FlagsUSA.com supports active-duty troops and military families. We're matching donations up to $50,000.</p>
+      <a href="#uso-donation-match" class="uso-btn">See the $50,000 Match &rarr;</a>
+    </div>
+  </section>
+
+  <!-- Logos Row -->
+  <div class="uso-logos-row">
+    <div class="brand-uso">
+      <img src="https://cdn.shopify.com/s/files/1/0888/9240/8090/files/united_service_organizations_logo_svg.png?v=1777906927" alt="USO">
+    </div>
+    <span class="divider"></span>
+    <div class="brand-flags">
+      <img src="https://cdn.shopify.com/s/files/1/0888/9240/8090/files/flagsusa-logo.svg?v=1777906927" alt="Flags USA">
+    </div>
+  </div>
+
+  <!-- Who We Are -->
+  <div class="uso-partnership-bg">
+    <section class="uso-section uso-partnership-section">
+      <div class="uso-container">
+        <div style="text-align:center; margin-bottom:52px; max-width:900px; margin-left:auto; margin-right:auto;">
+          <p class="eyebrow">Why This Partnership Was a Natural Fit</p>
+          <h2 style="margin-bottom:16px; white-space: nowrap;">Two Organizations. The Same Values.</h2>
+          <p>The USO chose Flags USA because they saw something rare — a brand with genuine roots, real craft, and a deep commitment to the people who carry the flag, not just sell it.</p>
+        </div>
+        <div class="uso-partner-cards">
+          <div class="uso-partner-card uso-card--uso">
+            <div class="uso-card-img">
+              <img src="https://cdn.shopify.com/s/files/1/0888/9240/8090/files/pexels-george-pak-7983750.jpg?v=1777906927" alt="Soldier reuniting with family">
+            </div>
+            <div class="uso-card-body">
+              <img src="https://cdn.shopify.com/s/files/1/0888/9240/8090/files/united_service_organizations_logo_svg.png?v=1777906927" alt="USO" class="uso-card-logo">
+              <h3>85 Years of Standing Beside Those Who Serve.</h3>
+              <ul class="uso-traits">
+                <li class="uso-stat-hero">Nearly 1 million service members &amp; families served each year</li>
+                <li>250+ centers across 55 U.S. states and territories</li>
+                <li>Operating in 134 countries since 1941</li>
+              </ul>
+            </div>
+          </div>
+          <div class="uso-partner-card uso-card--flags">
+            <div class="uso-card-img">
+              <img src="https://cdn.shopify.com/s/files/1/0888/9240/8090/files/2ecb9e9b-2c01-48d8-8b15-bd2f58bd0c34.jpg?v=1777906927" alt="Three generations of the Flags USA family">
+            </div>
+            <div class="uso-card-body">
+              <img src="https://cdn.shopify.com/s/files/1/0888/9240/8090/files/flagsusa-logo.svg?v=1777906927" alt="Flags USA" class="uso-card-logo">
+              <h3>Made in the USA. Built to Last.</h3>
+              <ul class="uso-traits">
+                <li class="uso-stat-hero">Every flag proudly made in America</li>
+                <li>Women-owned &amp; family-operated since day one</li>
+                <li>Commercial-grade materials built for lasting display</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Impact Stats -->
+    <section class="uso-section uso-impact-section" style="background: linear-gradient(rgba(237,241,241,0.78), rgba(237,241,241,0.78)); border-top: none !important;">
+      <div class="uso-container">
+        <div class="uso-impact-intro">
+          <p class="eyebrow">Our Impact</p>
+          <h2>Two Organizations. One Mission. Real Impact.</h2>
+          <p>Together, Flags USA and the USO are committed to honoring those who serve — through every purchase, donation, and flag made in America.</p>
+        </div>
+        <div class="uso-impact-grid">
+          <div class="uso-impact-tile">
+            <div class="uso-tile-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <div class="uso-impact-num">11.3MM</div>
+            <div class="uso-impact-label">USO programs &amp; services provided to service members and families</div>
+          </div>
+          <div class="uso-impact-tile">
+            <div class="uso-tile-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            </div>
+            <div class="uso-impact-num">350K</div>
+            <div class="uso-impact-label">USO care packages distributed across 90 countries</div>
+          </div>
+          <div class="uso-impact-tile">
+            <div class="uso-tile-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </div>
+            <div class="uso-impact-num">500+</div>
+            <div class="uso-impact-label">Flags donated to homeless veterans and military family charities nationwide</div>
+          </div>
+          <div class="uso-impact-tile">
+            <div class="uso-tile-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="uso-impact-num">100%</div>
+            <div class="uso-impact-label">Every Flags USA flag proudly made in the USA</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div><!-- /shared flag bg -->
+
+  <!-- Partnership Mission -->
+  <section class="uso-section" style="background: linear-gradient(to bottom, var(--paper) 0%, var(--paper) 78%, rgba(248,245,239,0) 100%); padding: 52px 0 96px;">
+    <div class="uso-container">
+      <div class="uso-media-text">
+        <div class="uso-media-img">
+          <img src="https://cdn.shopify.com/s/files/1/0888/9240/8090/files/pexels-christina-petsos-200616875-11874072.jpg?v=1777906927" alt="Soldier saluting the American flag at a military ceremony" style="object-position: center 18%;">
+        </div>
+        <div class="uso-media-copy">
+          <p class="eyebrow">Why This Partnership Matters</p>
+          <h2>Together, We Honor the People Who Serve.</h2>
+          <p>Flags USA and the USO share a commitment to the men and women who serve this nation. A flag is more than a product. It's a symbol of what we stand for and who we stand with. This partnership lets every purchase mean something more.</p>
+          <p>For 85 years the USO has stood beside service members from the moment they enlist through every stage of service. By connecting Flags USA customers with that mission, we can directly support troops and military families in a way that is personal and real.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- $50K Match Callout -->
+  <section class="uso-section uso-match-band" id="uso-donation-match" style="background: linear-gradient(to bottom, rgba(248,245,239,0) 0%, rgba(248,245,239,0.28) 22%, rgba(248,245,239,0.58) 72%, rgba(248,245,239,0.92) 100%), url('https://cdn.shopify.com/s/files/1/0888/9240/8090/files/3638e964-35da-4c59-8951-7c4be3a5332d.jpg?v=1777906927') center 65% / cover no-repeat; border-top: 0 !important;">
+    <div class="uso-container">
+      <div class="uso-donation-callout">
+        <div class="uso-callout-copy">
+          <img src="https://cdn.shopify.com/s/files/1/0888/9240/8090/files/united_service_organizations_logo_svg.png?v=1777906927" alt="USO" style="height:72px;width:auto;max-width:none !important;display:block;margin-bottom:20px;">
+          <p class="eyebrow" style="color:rgba(255,255,255,0.6)">America's 250th &middot; Limited-Time Campaign</p>
+          <h2>We're proud to support the USO with a $50,000 commitment.</h2>
+          <p style="max-width:520px; margin-bottom:20px;">Starting April 2026, Flags USA is matching customer donations to the USO dollar for dollar, up to $50,000. Add $2.50 at checkout and we'll match it. A simple way to turn your purchase into something greater.</p>
+          <a href="/collections/american-flags" class="uso-btn">Shop Now and Support the USO &rarr;</a>
+        </div>
+        <div class="uso-callout-stat">
+          <div class="uso-big-num">$50K</div>
+          <div class="uso-big-label">Flags USA<br>Match Commitment</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USO's Reach -->
+  <section class="uso-section">
+    <div class="uso-container">
+      <div class="uso-media-text reverse">
+        <div class="uso-media-img">
+          <img src="https://cdn.shopify.com/s/files/1/0888/9240/8090/files/istrfry-marcus-t41c_r3cvos-unsplash.jpg?v=1777906927" alt="American flag at sunrise">
+        </div>
+        <div class="uso-media-copy">
+          <p class="eyebrow">The USO's Reach</p>
+          <h2>Wherever Troops Serve, the USO Is There.</h2>
+          <p>The USO operates in 55 U.S. states and territories and across 134 countries, reaching service members in combat zones, isolated postings, and everywhere in between. They've been doing it since 1941.</p>
+          <p>Your donation goes directly to USO programs: care packages, entertainment tours, transition support, family resources, and more. It's support that reaches troops wherever they are.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /uso-page -->

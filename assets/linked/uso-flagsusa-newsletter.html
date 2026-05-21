@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Flags USA × USO — Newsletter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&family=Jost:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #1e343d;
+    --red: #a62b25;
+    --paper: #f8f5ef;
+    --uso-navy: #002147;
+    --muted: #5a6770;
+    --line: #d8d3c4;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: #e8e3d6;
+    color: var(--ink);
+    font-family: "Newsreader", Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 48px 16px;
+  }
+
+  /* Top bar (screen only) */
+  .bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: var(--uso-navy);
+    color: #fff;
+    z-index: 100;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: "Jost", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .bar-btn {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 7px 16px;
+    border-radius: 3px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .bar-btn:hover { background: rgba(255,255,255,0.18); }
+
+  /* Newsletter container */
+  .nl {
+    max-width: 640px;
+    margin: 64px auto 0;
+    background: var(--paper);
+    padding: 64px 56px 48px;
+    box-shadow: 0 20px 50px rgba(0,33,71,0.12);
+  }
+
+  /* Header */
+  .nl-header {
+    text-align: center;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 40px;
+  }
+  .lockup {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 14px;
+  }
+  .lockup img.u { height: 38px; width: auto; }
+  .lockup .x {
+    font-family: "Newsreader", serif;
+    font-size: 18px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .lockup img.f { height: 18px; width: auto; }
+  .nl-issue {
+    font-family: "Jost", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .nl-issue .sep { color: var(--red); margin: 0 8px; }
+
+  /* Eyebrow */
+  .eb {
+    font-family: "Jost", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin: 0 0 18px;
+  }
+
+  /* Headline */
+  h1 {
+    font-family: "Newsreader", serif;
+    font-size: 42px;
+    line-height: 1.1;
+    color: var(--ink);
+    margin: 0 0 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--red);
+    font-weight: 500;
+  }
+
+  /* Body */
+  p, .nl-body p {
+    font-family: "Newsreader", serif;
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--ink);
+    margin: 0 0 20px;
+  }
+  p.lede {
+    font-size: 21px;
+    line-height: 1.55;
+    color: var(--ink);
+    font-weight: 400;
+  }
+  p.lede::first-letter {
+    font-family: "Newsreader", serif;
+    font-size: 60px;
+    float: left;
+    line-height: 0.9;
+    padding: 4px 8px 0 0;
+    color: var(--red);
+    font-weight: 700;
+  }
+  strong { color: var(--ink); font-weight: 700; }
+
+  /* Section heads */
+  h2 {
+    font-family: "Jost", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin: 36px 0 14px;
+  }
+
+  /* Divider */
+  .rule {
+    border: none;
+    height: 1px;
+    background: var(--line);
+    margin: 36px 0;
+  }
+  .rule-dot {
+    text-align: center;
+    margin: 36px 0;
+    font-family: "Newsreader", serif;
+    color: var(--red);
+    font-size: 20px;
+    letter-spacing: 0.5em;
+  }
+
+  /* Pull quote */
+  .quote {
+    border-left: 3px solid var(--red);
+    padding: 6px 0 6px 22px;
+    margin: 32px 0;
+  }
+  .quote p {
+    font-family: "Newsreader", serif;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.45;
+    color: var(--ink);
+    margin: 0 0 12px;
+  }
+  .quote .attr {
+    font-family: "Jost", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .quote .attr .name { color: var(--ink); }
+
+  /* CTA */
+  .cta-block {
+    text-align: center;
+    margin: 44px 0 32px;
+  }
+  .cta {
+    display: inline-block;
+    background: var(--red);
+    color: #fff !important;
+    padding: 16px 36px;
+    border-radius: 3px;
+    font-family: "Jost", sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .cta:hover { background: #7f1f1a; }
+  .cta-sub {
+    font-family: "Jost", sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 14px;
+    letter-spacing: 0.04em;
+  }
+
+  /* Signature */
+  .sig {
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+  }
+  .sig p {
+    font-size: 17px;
+    margin: 0 0 4px;
+  }
+  .sig .sig-line {
+    font-family: "Jost", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 8px;
+    font-weight: 600;
+  }
+
+  /* Footer */
+  .footer {
+    max-width: 640px;
+    margin: 28px auto 0;
+    padding: 0 56px;
+    text-align: center;
+    font-family: "Jost", sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.7;
+    letter-spacing: 0.04em;
+  }
+  .footer a { color: var(--muted); text-decoration: underline; }
+  .footer .footer-brand {
+    font-family: "Newsreader", serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .footer .footer-links { margin: 12px 0; }
+  .footer .footer-links a { margin: 0 8px; }
+  .footer .footer-addr { margin-top: 10px; }
+
+  /* Subject preview block */
+  .preview {
+    max-width: 640px;
+    margin: 0 auto 16px;
+    padding: 16px 20px;
+    background: rgba(255,255,255,0.5);
+    border: 1px dashed var(--line);
+    font-family: "Jost", sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    border-radius: 3px;
+  }
+  .preview .pr-label {
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 10px;
+    margin-right: 8px;
+  }
+  .preview-row { margin-bottom: 4px; }
+  .preview-row:last-child { margin-bottom: 0; }
+
+  @media (max-width: 680px) {
+    .nl { padding: 40px 28px 32px; margin-top: 80px; }
+    .footer { padding: 0 24px; }
+    h1 { font-size: 32px; }
+    p, .nl-body p { font-size: 16px; }
+    p.lede { font-size: 18px; }
+  }
+
+  /* Print */
+  @media print {
+    .bar, .preview { display: none !important; }
+    body { background: #fff; padding: 0; }
+    .nl { box-shadow: none; margin: 0 auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div>Flags USA × USO — Launch Newsletter</div>
+  <button class="bar-btn" onclick="window.print()">Print to PDF</button>
+</div>
+
+<!-- Subject + preheader preview (for reference, hidden in print) -->
+<div class="preview">
+  <div class="preview-row"><span class="pr-label">Subject</span>We're a proud partner of the USO.</div>
+  <div class="preview-row"><span class="pr-label">Preheader</span>Through December 2026, every Flags USA order helps support service members and their families.</div>
+  <div class="preview-row"><span class="pr-label">From</span>Flags USA &lt;hello@flagsusa.com&gt;</div>
+</div>
+
+<article class="nl">
+
+  <header class="nl-header">
+    <div class="lockup">
+      <img class="u" src="https://cdn.shopify.com/s/files/1/0888/9240/8090/files/united_service_organizations_logo_svg.png?v=1777906927" alt="USO" />
+      <span class="x">×</span>
+      <img class="f" src="https://cdn.shopify.com/s/files/1/0888/9240/8090/files/flagsusa-logo.svg?v=1777906927" alt="Flags USA" />
+    </div>
+    <div class="nl-issue">From Flags USA <span class="sep">·</span> May 13, 2026</div>
+  </header>
+
+  <p class="eb">An Announcement from Flags USA</p>
+  <h1>We're a proud partner of <em>the USO.</em></h1>
+
+  <div class="nl-body">
+
+    <p class="lede">After 38 years of making American flags, we're standing alongside an organization whose mission lines up with everything we believe in. Today we're announcing a partnership with the USO, the leading nonprofit supporting active-duty troops and their families. Through December 2026, every Flags USA order helps fund the programs and services service members rely on.</p>
+
+    <h2>How You Give</h2>
+
+    <p>At checkout, you'll see an option to add a <strong>$2.50 donation</strong> to your order. The full amount goes directly to USO programs. No fee, no markup, no fine print.</p>
+
+    <p>We're also matching every dollar contributed through the campaign, up to <strong>$25,000</strong>. Your $2.50 turns into $5.00 in support.</p>
+
+    <h2>Why This Partnership</h2>
+
+    <p>The USO has stood beside service members since 1941. They operate in 55 U.S. states and territories and across 134 countries, reaching troops in combat zones, isolated postings, and everywhere in between.</p>
+
+    <p>For us, a flag has always represented more than fabric and grommets. The flag stands for the people who serve and the families who serve alongside them. Partnering with the USO lets every Flags USA order mean a little more.</p>
+
+    <div class="quote">
+      <p>"At Flags USA, the American flag has always represented far more than a product. The flag represents the people who have sacrificed to protect the freedoms we all share."</p>
+      <div class="attr"><span class="name">Kim Dacka</span> · CEO, Flags USA</div>
+    </div>
+
+    <h2>What's Ahead</h2>
+
+    <p>The campaign runs through December 2026, anchored to America's 250th birthday year. We'll share updates as the match builds and as the impact grows.</p>
+
+    <p>For now, the easiest way to support is at checkout. Add the $2.50 on your next order. We'll handle the rest.</p>
+
+    <div class="cta-block">
+      <a class="cta" href="https://flagsusa.com/pages/uso">Shop and Support the USO →</a>
+      <div class="cta-sub">Learn more at FlagsUSA.com/USO</div>
+    </div>
+
+    <hr class="rule" />
+
+    <p>Thank you for being part of this. Every order, every flag, every $2.50 adds up to real support for the people who serve.</p>
+
+    <div class="sig">
+      <p>Warmly,</p>
+      <p><em>The Flags USA Team</em></p>
+      <div class="sig-line">Carol Stream, IL · Family-Run Since 1987</div>
+    </div>
+
+  </div>
+
+</article>
+
+<footer class="footer">
+  <div class="footer-brand">Flags USA</div>
+  <div>765 Kimberly Drive · Carol Stream, IL 60188</div>
+  <div class="footer-links">
+    <a href="https://flagsusa.com">FlagsUSA.com</a> ·
+    <a href="https://flagsusa.com/pages/uso">FlagsUSA.com/USO</a> ·
+    <a href="https://uso.org">USO.org</a>
+  </div>
+  <div class="footer-addr">You're receiving this because you subscribed at FlagsUSA.com. <a href="#">Update preferences</a> or <a href="#">unsubscribe</a>.</div>
+</footer>
+
+</body>
+</html>

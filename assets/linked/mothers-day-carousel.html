@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mother's Day Carousel Instagram Post</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: #e2e2e2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        font-family: "Jost", sans-serif;
+        padding: 40px 20px;
+        gap: 20px;
+      }
+
+      .page-label {
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: #666;
+      }
+
+      /* ── CAROUSEL WRAPPER ── */
+      .carousel-wrap {
+        position: relative;
+        width: 540px;
+      }
+
+      .carousel {
+        width: 540px;
+        height: 540px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+      }
+
+      /* ── SLIDES ── */
+      .slide {
+        position: absolute;
+        inset: 0;
+        width: 540px;
+        height: 540px;
+        opacity: 0;
+        transition: opacity 0.45s ease;
+        pointer-events: none;
+      }
+      .slide.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      /* ══════════════════════════════════════
+       SHARED PHOTO TREATMENT
+       Same overlay philosophy across slides:
+       - Light/clear top 50% so faces breathe
+       - Navy gradient rises from bottom 55%
+       - Photo sits at 90% opacity
+    ══════════════════════════════════════ */
+      .bg-photo {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        opacity: 0.9;
+      }
+
+      /* Shared overlay — same values for both photo slides */
+      .overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(10, 26, 43, 0.94) 0%,
+          rgba(10, 26, 43, 0.72) 38%,
+          rgba(10, 26, 43, 0.15) 58%,
+          transparent 72%
+        );
+      }
+
+      /* Thin left red accent — consistent across photo slides */
+      .flag-accent {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: #a72b24;
+      }
+
+      /* Slide counter — top right */
+      .slide-counter {
+        position: absolute;
+        top: 16px;
+        right: 18px;
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 1.5px;
+        color: rgba(255, 255, 255, 0.55);
+        z-index: 5;
+        pointer-events: none;
+      }
+
+      /* ════════════════════════════
+       SLIDE 1 — Lynee + Girls
+    ════════════════════════════ */
+      .slide-1 {
+        background: #06121e;
+      }
+
+      /* Show full group — shift right so all 4 faces are visible */
+      .slide-1 .bg-photo {
+        object-position: 34% center;
+      }
+
+      .slide-1 .content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 0 36px 40px;
+      }
+
+      .slide-1 .top-stamp {
+        position: absolute;
+        top: 14px;
+        left: 36px;
+        z-index: 6;
+      }
+
+      .slide-1 .top-stamp img {
+        height: 20px;
+        width: auto;
+        opacity: 1;
+      }
+
+      .slide-1 .eyebrow {
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 1.6px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.82);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        margin-bottom: 10px;
+      }
+
+      .slide-1 .headline {
+        font-size: 46px;
+        font-weight: 900;
+        color: #fff;
+        line-height: 0.98;
+        letter-spacing: -1.5px;
+        margin-bottom: 14px;
+      }
+
+      .slide-1 .tagline {
+        font-size: 15px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.72);
+        line-height: 1.5;
+        max-width: 360px;
+      }
+
+      /* Integrated swipe pill */
+      .swipe-pill {
+        position: absolute;
+        bottom: 44px;
+        right: 32px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        padding: 5px 12px 5px 10px;
+        font-size: 9px;
+        font-weight: 900;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(4px);
+      }
+      .swipe-pill svg {
+        width: 12px;
+        height: 12px;
+        fill: rgba(255, 255, 255, 0.75);
+      }
+
+      /* ════════════════════════════
+       SLIDE 2 — Kim + Judi + Lillie
+    ════════════════════════════ */
+      .slide-2 {
+        background: #06121e;
+      }
+
+      /* Reframe: pull left to reduce window-split dead center,
+       show all subjects. Slight zoom out via scale trick. */
+      .slide-2 .bg-photo {
+        object-position: 30% 24%;
+        transform: scale(1.08);
+        transform-origin: 30% 24%;
+      }
+
+      /* Keep slide 2 photo clearer above the copy area */
+      .slide-2 .overlay {
+        background: linear-gradient(
+          to top,
+          rgba(10, 26, 43, 0.86) 0%,
+          rgba(10, 26, 43, 0.55) 34%,
+          rgba(10, 26, 43, 0.1) 56%,
+          transparent 72%
+        );
+      }
+
+      /* Top label */
+      .slide-2 .top-label {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        padding: 5px 9px;
+        background: rgba(10, 26, 43, 0.62);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 999px;
+        backdrop-filter: blur(3px);
+      }
+      .slide-2 .top-label .dot-red {
+        width: 7px;
+        height: 7px;
+        background: #a72b24;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .slide-2 .top-label span {
+        font-size: 9px;
+        font-weight: 900;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.95);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+      }
+
+      .slide-2 .content {
+        position: absolute;
+        top: 42px;
+        left: 22px;
+        right: auto;
+        bottom: auto;
+        padding: 14px 16px;
+        max-width: 292px;
+        background: rgba(10, 26, 43, 0.44);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        backdrop-filter: blur(4px);
+      }
+      .slide-2 .name {
+        font-size: 28px;
+        font-weight: 900;
+        color: #fff;
+        line-height: 1.05;
+        margin-bottom: 12px;
+        letter-spacing: -0.5px;
+      }
+      .slide-2 .rule {
+        width: 32px;
+        height: 2px;
+        background: #a72b24;
+        margin-bottom: 14px;
+        border-radius: 1px;
+      }
+      .slide-2 .caption {
+        font-size: 15px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.78);
+        line-height: 1.55;
+        max-width: 100%;
+      }
+      .slide-2 .caption strong {
+        color: #fff;
+        font-weight: 700;
+      }
+
+      /* ════════════════════════════
+       SLIDE 3 — CTA Closing
+    ════════════════════════════ */
+      .slide-3 {
+        background: #0a1a2b;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 50px 52px;
+        position: relative;
+      }
+
+      /* Subtle photo echo — barely-visible texture */
+      .slide-3 .bg-texture {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+          rgba(167, 43, 36, 0.06) 1.5px,
+          transparent 1.5px
+        );
+        background-size: 32px 32px;
+      }
+      /* Vignette edges */
+      .slide-3 .bg-vignette {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse at center,
+          transparent 40%,
+          rgba(6, 18, 30, 0.7) 100%
+        );
+      }
+
+      .slide-3 .inner {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .slide-3 .rule-top {
+        width: 36px;
+        height: 3px;
+        background: #a72b24;
+        border-radius: 2px;
+        margin-bottom: 16px;
+      }
+      .slide-3 .thanks {
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: #a72b24;
+        margin-bottom: 12px;
+      }
+      .slide-3 .headline {
+        font-size: 36px;
+        font-weight: 900;
+        color: #fff;
+        line-height: 1.05;
+        letter-spacing: -0.5px;
+        margin-bottom: 12px;
+      }
+      .slide-3 .headline span {
+        color: #a72b24;
+      }
+      .slide-3 .sub {
+        font-size: 14px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.52);
+        line-height: 1.65;
+        margin-bottom: 30px;
+        max-width: 310px;
+      }
+      .slide-3 .cta-btn {
+        background: #a72b24;
+        color: #fff;
+        text-decoration: none;
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 14px 32px;
+        border-radius: 2px;
+        margin-bottom: 30px;
+        display: inline-block;
+        white-space: nowrap;
+      }
+      .slide-3 .brand-row {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .slide-3 .brand-row svg {
+        height: 18px;
+      }
+      .slide-3 .brand-row svg .cls-2 {
+        fill: rgba(255, 255, 255, 0.75);
+      }
+      .slide-3 .brand-row svg .cls-3 {
+        fill: rgba(255, 255, 255, 0.3);
+      }
+      .slide-3 .brand-row svg .cls-4 {
+        fill: #a72b24;
+      }
+      .slide-3 .brand-row .sep {
+        width: 1px;
+        height: 16px;
+        background: rgba(255, 255, 255, 0.18);
+      }
+      .slide-3 .brand-row .url {
+        font-size: 12px;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.45);
+        letter-spacing: 0.5px;
+      }
+      .slide-3 .slide-counter {
+        color: rgba(255, 255, 255, 0.3);
+      }
+
+      /* ── NAVIGATION ── */
+      .nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 36px;
+        height: 36px;
+        background: rgba(255, 255, 255, 0.92);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+        z-index: 10;
+        transition: background 0.2s;
+      }
+      .nav-btn:hover {
+        background: #fff;
+      }
+      .nav-btn svg {
+        width: 14px;
+        height: 14px;
+        fill: #0d2035;
+      }
+      .nav-prev {
+        left: -18px;
+      }
+      .nav-next {
+        right: -18px;
+      }
+
+      /* ── DOTS ── */
+      .dots {
+        display: flex;
+        gap: 7px;
+        justify-content: center;
+        margin-top: 14px;
+      }
+      .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #bbb;
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          transform 0.2s;
+      }
+      .dot.active {
+        background: #a72b24;
+        transform: scale(1.25);
+      }
+    </style>
+  </head>
+  <body>
+    <p class="page-label">
+      Carousel | 3 Slides | 1080×1080 each (preview at 540px)
+    </p>
+
+    <div class="carousel-wrap">
+      <button
+        class="nav-btn nav-prev"
+        onclick="changeSlide(-1)"
+        aria-label="Previous"
+      >
+        <svg viewBox="0 0 24 24">
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+        </svg>
+      </button>
+      <button
+        class="nav-btn nav-next"
+        onclick="changeSlide(1)"
+        aria-label="Next"
+      >
+        <svg viewBox="0 0 24 24">
+          <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+        </svg>
+      </button>
+
+      <div class="carousel">
+        <!-- ── SLIDE 1 — Emotional Hook ── -->
+        <div class="slide slide-1 active">
+          <img
+            class="bg-photo"
+            src="../../06 - Media Library/Reference Images/Potential Images/Soft Proof Sample C-25.jpg"
+            alt="Lynee and her girls"
+          />
+          <div class="overlay"></div>
+          <div class="flag-accent"></div>
+          <div class="slide-counter">1 / 3</div>
+          <div class="top-stamp">
+            <img
+              src="../../05 - Resources/BRAND/Flags_USA_Full_Graphic_b899ff84-98da-4bd9-9598-b0016a6ce943.svg"
+              alt="FlagsUSA logo"
+            />
+          </div>
+
+          <div class="content">
+            <p class="eyebrow">Mother's Day | May 10</p>
+            <h2 class="headline">Happy<br />Mother's<br />Day.</h2>
+            <p class="tagline">
+              To the mothers who hold families, homes, and traditions together.
+            </p>
+          </div>
+
+          <div class="swipe-pill">
+            <svg viewBox="0 0 24 24">
+              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+            </svg>
+            Swipe
+          </div>
+        </div>
+
+        <!-- ── SLIDE 2 — Human / Company Connection ── -->
+        <div class="slide slide-2">
+          <img
+            class="bg-photo"
+            src="../../06 - Media Library/Reference Images/Potential Images/Soft_Proof_Sample_A-52_3f9e8a54-48d4-4eaa-bb63-828f997592e7.jpg"
+            alt="Julia, Kim, and Lillie folding a flag"
+          />
+          <div class="overlay"></div>
+          <div class="flag-accent"></div>
+          <div class="slide-counter">2 / 3</div>
+
+          <div class="content">
+            <h3 class="name">
+              Three generations keep this flag tradition alive.
+            </h3>
+            <div class="rule"></div>
+            <p class="caption">
+              <strong
+                >We are celebrating Mother's Day with the families who keep
+                traditions alive.</strong
+              >
+              Love, legacy, and American pride are passed down one generation at
+              a time.
+            </p>
+          </div>
+        </div>
+
+        <!-- ── SLIDE 3 — Action Tied to Meaning ── -->
+        <div class="slide slide-3">
+          <div class="bg-texture"></div>
+          <div class="bg-vignette"></div>
+          <div class="slide-counter">3 / 3</div>
+
+          <div class="inner">
+            <div class="rule-top"></div>
+            <p class="thanks">Celebrate What Matters</p>
+            <h2 class="headline">
+              Honor the people<br />who make home<br /><span
+                >feel like home.</span
+              >
+            </h2>
+            <p class="sub">
+              Proudly made in America, with flags for the families and
+              traditions worth celebrating.
+            </p>
+            <a class="cta-btn" href="https://flagsusa.com"
+              >Shop Mother's Day Flags</a
+            >
+            <div class="brand-row">
+              <svg
+                viewBox="0 0 480.44 55.08"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <style>
+                  .cls-2 {
+                    fill: rgba(255, 255, 255, 0.75);
+                  }
+                  .cls-3 {
+                    fill: rgba(255, 255, 255, 0.3);
+                  }
+                  .cls-4 {
+                    fill: #a72b24;
+                  }
+                </style>
+                <path
+                  d="M440.09,9.7h-10.11l-13.69,35.67h9.79l2.41-5.99h12.94l2.2,5.99h9.9l-13.42-35.67h0ZM437.62,27.29l1.54,4.72-4.02-2.92-4.02,2.92,1.54-4.72-4.02-2.92h4.97l1.54-4.72,1.54,4.72h4.97l-4.02,2.92h0Z"
+                  class="cls-2"
+                />
+                <path
+                  d="M338.82,9.7v21.13c0,1.5.05,3.8,1.82,5.51,1.07,1.01,2.78,1.71,4.39,1.71s3.26-.64,4.28-1.55c2.14-1.87,2.09-4.49,2.09-6.47V9.7h9.25v20.49c0,3.75-.16,7.65-4.01,11.55-3,3.05-6.74,4.44-11.77,4.44-5.62,0-9.63-1.93-11.82-4.28-3.1-3.37-3.48-7.92-3.48-11.72V9.7h9.25,0Z"
+                  class="cls-2"
+                />
+                <path
+                  d="M382.86,34.68c1.98,1.87,4.97,3.64,8.18,3.64,1.87,0,3-.59,3.58-1.23.54-.53.91-1.34.91-2.25,0-.69-.27-1.5-1.01-2.14-.91-.8-2.3-1.18-4.6-1.87l-2.41-.75c-1.5-.48-3.69-1.28-5.14-2.89-1.82-1.98-2.03-4.49-2.03-6.31,0-4.39,1.71-7.06,3.26-8.61,1.82-1.82,4.82-3.37,9.15-3.37,3.53,0,7.65,1.13,11.02,2.89l-3.69,7.22c-2.78-2.2-4.87-2.41-6.1-2.41-.91,0-2.14.21-3.05,1.07-.53.53-.91,1.13-.91,1.93,0,.64.11,1.13.48,1.61.27.32.91.96,3.1,1.6l2.83.86c2.25.69,4.6,1.5,6.47,3.53,1.82,1.93,2.3,3.9,2.3,6.37,0,3.26-.8,6.42-3.37,8.99-3.05,3.05-6.74,3.64-10.54,3.64-2.25,0-4.39-.21-7.01-1.18-.59-.21-2.83-1.07-5.4-2.83l3.96-7.49h0Z"
+                  class="cls-2"
+                />
+                <path
+                  d="M284.08,18.94l-2.3-11.29c.49,4.73-13.41,8.99-13.41,8.99,5.04,1.75,10.37,2.53,15.71,2.3"
+                  class="cls-3"
+                />
+                <path
+                  d="M270.49,1.47c-26.62-6.35-47.07,9.88-47.07,9.88l6.44,10.3c17.6-12.02,34.8-11.7,45.44-7.75,6.39-3.11,12.53-8.29-4.81-12.43"
+                  class="cls-2"
+                />
+                <path
+                  d="M272.99,31.3l-3.01-9.56c-16.61-3.62-28.78,4.4-35.18,7.83l6.15,9.84c11.2-7.35,22.88-9.82,32.04-8.11"
+                  class="cls-2"
+                />
+                <path
+                  d="M279.48,51.92l-3.09-9.8c-11.74-4.84-26.93,1.65-30.76,4.79l5.11,8.18c11.46-13.05,28.74-3.16,28.74-3.16"
+                  class="cls-4"
+                />
+                <path
+                  d="M310.42,11.44L309.8,0c-11.46,28.21-41.43,16.64-41.43,16.64l2.57,8.07c7.03,2.75,26.91,6.44,39.48-13.26"
+                  class="cls-4"
+                />
+                <path
+                  d="M311.32,31.46l-.44-8.37c-13.14,15.69-29.65,11.43-37.29,9.95l2.85,8.94c7.66,2.3,23.42,3.66,34.87-10.52"
+                  class="cls-4"
+                />
+                <polygon
+                  points="20.43 17.56 9.25 17.56 9.25 23.5 19.42 23.5 19.42 31.36 9.25 31.36 9.25 45.37 0 45.37 0 9.7 20.43 9.7 20.43 17.56"
+                  class="cls-2"
+                />
+                <polygon
+                  points="47.94 9.7 47.94 37.51 59.06 37.51 59.06 45.37 38.68 45.37 38.68 9.7 47.94 9.7"
+                  class="cls-2"
+                />
+                <path
+                  d="M142.19,25.16h18.4c0,7.06-1.44,12.09-5.72,16.04-3.75,3.48-8.02,4.49-12.57,4.49-6.42,0-10.8-2.35-13.69-5.3-2.68-2.68-5.14-7.01-5.14-12.89s2.25-10.32,5.35-13.37c2.94-2.94,7.54-5.24,13.85-5.24,3.32,0,6.9.75,9.63,2.41,2.78,1.71,5.08,4.55,6.37,7.33l-8.83,3.63c-.64-1.66-1.66-2.83-2.57-3.58-1.55-1.28-3.21-1.76-4.97-1.76-2.2,0-4.44.8-6.1,2.46-2.09,2.09-3.1,5.4-3.1,8.18,0,3.26,1.18,5.94,2.83,7.7,1.71,1.82,3.8,2.73,6.52,2.73,1.6,0,3.48-.27,5.14-1.66.86-.69,1.87-1.98,2.2-3.96h-7.59v-7.22.02Z"
+                  class="cls-2"
+                />
+                <path
+                  d="M182.8,34.68c1.98,1.87,4.97,3.64,8.18,3.64,1.87,0,3-.59,3.58-1.23.54-.53.91-1.34.91-2.25,0-.69-.27-1.5-1.01-2.14-.91-.8-2.3-1.18-4.6-1.87l-2.41-.75c-1.5-.48-3.69-1.28-5.14-2.89-1.82-1.98-2.03-4.49-2.03-6.31,0-4.39,1.71-7.06,3.26-8.61,1.82-1.82,4.82-3.37,9.15-3.37,3.53,0,7.65,1.13,11.02,2.89l-3.69,7.22c-2.78-2.2-4.87-2.41-6.1-2.41-.91,0-2.14.21-3.05,1.07-.54.53-.91,1.13-.91,1.93,0,.64.11,1.13.48,1.61.27.32.91.96,3.1,1.6l2.83.86c2.25.69,4.6,1.5,6.47,3.53,1.82,1.93,2.3,3.9,2.3,6.37,0,3.26-.8,6.42-3.37,8.99-3.05,3.05-6.74,3.64-10.53,3.64-2.25,0-4.39-.21-7.01-1.18-.59-.21-2.83-1.07-5.4-2.83l3.96-7.49h0Z"
+                  class="cls-2"
+                />
+                <path
+                  d="M98.97,9.7h-10.11l-13.69,35.67h9.79l2.41-5.99h12.94l2.2,5.99h9.9l-13.42-35.67h0ZM96.41,27.29l1.54,4.72-4.02-2.92-4.02,2.92,1.54-4.72-4.02-2.92h4.97l1.54-4.72,1.54,4.72h4.97l-4.02,2.92h0Z"
+                  class="cls-2"
+                />
+                <polygon
+                  points="467.33 37.72 467.33 45.28 465.56 45.28 465.56 37.72 463.52 37.72 463.52 36.2 469.37 36.2 469.37 37.72 467.33 37.72"
+                  class="cls-2"
+                />
+                <polygon
+                  points="471.43 36.2 472.71 36.2 475.12 41.97 477.63 36.2 478.92 36.2 480.44 45.28 478.64 45.28 477.83 39.69 475.39 45.28 474.79 45.28 472.46 39.69 471.54 45.28 469.74 45.28 471.43 36.2"
+                  class="cls-2"
+                />
+              </svg>
+              <div class="sep"></div>
+              <span class="url">flagsusa.com</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /carousel -->
+
+      <div class="dots">
+        <div class="dot active" onclick="goToSlide(0)"></div>
+        <div class="dot" onclick="goToSlide(1)"></div>
+        <div class="dot" onclick="goToSlide(2)"></div>
+      </div>
+    </div>
+    <!-- /carousel-wrap -->
+
+    <p class="page-label" style="font-size: 10px; color: #999">
+      Prev/next arrows or dots | keyboard ← → | export each at 2× for 1080×1080
+    </p>
+
+    <script>
+      let current = 0;
+      const slides = document.querySelectorAll(".slide");
+      const dots = document.querySelectorAll(".dot");
+
+      function goToSlide(idx) {
+        slides[current].classList.remove("active");
+        dots[current].classList.remove("active");
+        current = (idx + slides.length) % slides.length;
+        slides[current].classList.add("active");
+        dots[current].classList.add("active");
+      }
+      function changeSlide(dir) {
+        goToSlide(current + dir);
+      }
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") changeSlide(1);
+        if (e.key === "ArrowLeft") changeSlide(-1);
+      });
+    </script>
+  </body>
+</html>
